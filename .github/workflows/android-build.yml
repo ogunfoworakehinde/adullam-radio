@@ -1,4 +1,6 @@
 name: Build and Release Android App
+permissions:
+  contents: write
 
 on:
   push:
