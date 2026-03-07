@@ -12,38 +12,51 @@ jobs:
 
     steps:
 
+    # 1️⃣ Checkout your repository
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    # 2️⃣ Setup Node.js
     - name: Setup Node
       uses: actions/setup-node@v4
       with:
         node-version: 18
 
+    # 3️⃣ Install Cordova globally
     - name: Install Cordova
       run: npm install -g cordova
 
+    # 4️⃣ Install project dependencies
     - name: Install dependencies
       run: npm install
 
+    # 5️⃣ Add Android platform
     - name: Add Android platform
       run: cordova platform add android
 
+    # 6️⃣ Decode Keystore for signing
     - name: Decode Keystore
       run: |
         echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > adullam-release-key.jks
 
-    - name: Build Android Release
-      run: cordova build android --release
+    # 7️⃣ Build APK and AAB
+    - name: Build APK and AAB
+      run: |
+        cordova prepare android
+        cd platforms/android
+        ./gradlew assembleRelease
+        ./gradlew bundleRelease
 
+    # 8️⃣ Upload APK as artifact
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: adullam-apk
-        path: platforms/android/app/build/outputs/apk/release/*.apk
+        path: platforms/android/app/build/outputs/apk/release/app-release.apk
 
+    # 9️⃣ Upload AAB as artifact
     - name: Upload AAB
       uses: actions/upload-artifact@v4
       with:
         name: adullam-aab
-        path: platforms/android/app/build/outputs/bundle/release/*.aab
+        path: platforms/android/app/build/outputs/bundle/release/app-release.aab
