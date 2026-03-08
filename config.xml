@@ -1,13 +1,48 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.adullamdigital.radio" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.adullamdigital.radio"
+        version="1.0.0"
+        xmlns="http://www.w3.org/ns/widgets"
+        xmlns:cdv="http://cordova.apache.org/ns/1.0">
+
     <name>AdullamRadio</name>
+
     <description>
-        A sampl Apache Cordova application that responds to the deviceready event.
+        Adullam Digital Radio streaming application.
     </description>
-    <author email="dev@cordova.apache.org" href="https://cordova.apache.org">
-        Apache Cordova Team
+
+    <author email="support@adullamdigital.com" href="https://adullamdigital.com">
+        Adullam Digital
     </author>
+
+    <!-- Main App Page -->
     <content src="index.html" />
+
+    <!-- Allow Internet -->
+    <access origin="*" />
+
+    <!-- Allow external links -->
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+
+    <!-- Android platform -->
+    <platform name="android">
+
+        <!-- App Icon -->
+        <icon src="resources/icon.png" />
+
+        <!-- Splash Screen -->
+        <splash src="resources/splash.png" />
+
+        <!-- Android Preferences -->
+        <preference name="AndroidLaunchMode" value="singleTop"/>
+        <preference name="KeepRunning" value="true"/>
+
+    </platform>
+
+    <!-- Splash Screen Preferences -->
+    <preference name="SplashScreenDelay" value="3000"/>
+    <preference name="AutoHideSplashScreen" value="true"/>
+    <preference name="FadeSplashScreen" value="true"/>
+    <preference name="FadeSplashScreenDuration" value="500"/>
+
 </widget>
